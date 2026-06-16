@@ -16,25 +16,24 @@ public:
             return head;
         }
 
-        int n=0;
-        while(ptr!=NULL){
+        int n=1;
+        while(ptr->next!=NULL){
             n++;
             ptr=ptr->next;
         }
         k=k%n;
         if(k==0) return head;
         
-        
-        while(k>0){
-            ptr=head;
-            while(ptr->next->next!=NULL){
-                ptr=ptr->next;
-            }
-            ptr->next->next=head;
-            head=ptr->next;
-            ptr->next=NULL;
-            k--;
+        ptr->next=head;
+
+        int steps=n-k;
+        while(ptr!=NULL && steps>0){
+            ptr=ptr->next;
+            steps--;
         }
-        return head;
+        
+        ListNode* newhead=ptr->next;
+        ptr->next=NULL;
+        return newhead;
     }
 };
