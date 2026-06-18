@@ -3,6 +3,7 @@ public:
     vector<vector<int>>res;
     vector<vector<int>> combinationSum(vector<int>& nums, int target) {
         vector<int>temp;
+        sort(nums.begin(),nums.end());
         solve(nums,target,0,temp,0);
         return res;
     }
@@ -12,7 +13,7 @@ public:
             res.push_back(temp);
             return;
         }
-        
+
         if(i>=nums.size() || sum>target){
             return;
         }
