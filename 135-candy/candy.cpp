@@ -2,26 +2,35 @@ class Solution {
 public:
     int candy(vector<int>& ratings) {
         int n=ratings.size();
-        vector<int>L2R(n,1);
-        vector<int>R2L(n,1);
+        int candy=n;
 
-        for(int i=1;i<n;i++){
-            if(ratings[i]>ratings[i-1]){
-                L2R[i]=max(L2R[i],L2R[i-1]+1);
+        int i=1;
+        while(i<n){
+
+            if(ratings[i]==ratings[i-1]){
+                i++;
+                continue;
             }
-        }
 
-        for(int i=n-2;i>=0;i--){
-            if(ratings[i]>ratings[i+1]){
-                R2L[i]=max(R2L[i],R2L[i+1]+1);
+            //increasing slope
+            int peak=0;
+            while(i<n && ratings[i]>ratings[i-1]){
+                peak++;
+                candy+=peak;
+                i++;
             }
-        }
 
-        int res=0;
-        for(int i=0;i<n;i++){
-            res=res+max(L2R[i],R2L[i]);
-        }
+            //decreasing slope
+            int dip=0;
+            while(i<n && ratings[i]<ratings[i-1]){
+                dip++;
+                candy+=dip;
+                i++;
+            }
 
-        return res;
+            if (peak > 0 && dip > 0)
+                candy -= min(peak, dip);
+        }
+        return candy;
     }
 };
