@@ -4,9 +4,9 @@ public:
     void solve(int i,int j,vector<vector<char>>& grid,vector<vector<int>>& vis,int m,int n){
         vis[i][j]=1;
 
-        int col[]={0,1,0,-1};
         int row[]={1,0,-1,0};
-
+        int col[]={0,1,0,-1};
+        
         for(int p=0;p<4;p++){
             int nrow=i+row[p];
             int ncol=j+col[p];
